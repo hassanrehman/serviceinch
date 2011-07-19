@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ticket_note_id: 1
+  changed_field: MyString
+  old_value: MyString
+  new_value: MyString
+
+two:
+  ticket_note_id: 1
+  changed_field: MyString
+  old_value: MyString
+  new_value: MyString

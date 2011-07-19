@@ -1,0 +1,44 @@
+<% form_for @ticket_category do |f| -%>
+
+  <table border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+    <tr bgcolor="#DDDDDD">
+      <td width="2px" bgcolor="#808080">
+        <%#= error_messages_for :ticket_category %>
+      </td>
+      <td>
+        <div class="formHeading formHeadingModal">Ticket Category Info</div>
+        <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+          <tr>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td align="left">Name</td>
+            <td><%= f.text_field :name, :readonly => true %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Comments</td>
+            <td><%= f.text_area :comments, :readonly => true %></td>
+          </tr>
+        </table>
+      </td>
+
+      <td valign="top">
+        <ul class="points">
+          <li>First Name and Last Name are optional</li>
+          <li>Your email will be used as your login id</li>
+          <li>Password must be at least 5 characters long</li>
+          <li>Zip code must be a 5 digit numbber</li>
+        </ul>
+      </td>
+    </tr>
+    <tr bgcolor="#808080">
+      <td>&nbsp;</td>
+      <td colspan="2">
+        <%= submit_tag 'Close', :onclick => "$.nmTop().close(); return false;" %>
+      </td>
+    </tr>
+  </table>
+
+<%- end -%>

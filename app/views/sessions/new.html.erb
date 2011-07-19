@@ -1,0 +1,54 @@
+
+<% form_tag session_path do -%>
+
+  <table width="710px" border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+    <tr bgcolor="#DDDDDD">
+      <td width="2px" bgcolor="#808080"></td>
+      <td width="400px">
+        <div class="formHeading formHeadingModal">Login</div>
+        <!-- The inner table below is a container for form -->
+        <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+          <tr>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td align="left">Username *</td>
+            <td width="220px"><%= text_field_tag 'login', @login, :size => 32 %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Password *</td>
+            <td><%= password_field_tag 'password', nil, :size => 32 %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Remember Me</td>
+            <td>
+              <%= check_box_tag 'remember_me', '1', @remember_me %>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+
+      <td valign="top">
+        <ul class="points">
+          <li>Please enter your username and password to login</li>
+          <li>Do not use Remember Me option if you're on a public computer</li>
+        </ul>
+      </td>
+    </tr>
+    <tr bgcolor="#808080">
+      <td>&nbsp;</td>
+      <td colspan="2">
+        <%= submit_tag 'Log in' %>
+      </td>
+    </tr>
+  </table>
+
+<%- end -%>
+

@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  added_by: 1
+  subject: MyString
+  description: MyText
+  ticket_status_id: 1
+  ticket_priority_id: 1
+  assignee_id: 1
+  ticket_category_id: 1
+  start_date: 2011-06-19 01:23:55
+  end_date: 2011-06-19 01:23:55
+
+two:
+  added_by: 1
+  subject: MyString
+  description: MyText
+  ticket_status_id: 1
+  ticket_priority_id: 1
+  assignee_id: 1
+  ticket_category_id: 1
+  start_date: 2011-06-19 01:23:55
+  end_date: 2011-06-19 01:23:55

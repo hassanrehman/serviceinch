@@ -1,0 +1,54 @@
+<table border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+  <tr bgcolor="#DDDDDD">
+    <td width="2px" bgcolor="#808080">
+    </td>
+    <td>
+      <div class="formHeading formHeadingModal">Agent Registration</div>
+      <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+        <tr>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td align="left">Username</td>
+          <td><%= text_field :user, :login, :readonly => true %></td>
+        </tr>
+
+        <tr>
+          <td align="left">Full Name</td>
+          <td><%= text_field :user, :name, :readonly => true %></td>
+        </tr>
+
+        <tr>
+          <td align="left">Email</td>
+          <td><%= text_field :user, :email, :readonly => true %></td>
+        </tr>
+        <%- @user_access = @user.user_access -%>
+        <tr>
+          <td align="left">Can Create/Edit Tickets</td>
+          <td><%= image_tag "access_#{@user_access.can_create_ticket}.png" %></td>
+        </tr>
+
+        <tr>
+          <td align="left">Can Create/Edit Customers</td>
+          <td><%= image_tag "access_#{@user_access.can_edit_customer}.png" %></td>
+        </tr>
+      </table>
+    </td>
+
+    <td valign="top">
+      <ul class="points">
+        <li>First Name and Last Name are optional</li>
+        <li>Your email will be used as your login id</li>
+        <li>Password must be at least 5 characters long</li>
+        <li>Zip code must be a 5 digit numbber</li>
+      </ul>
+    </td>
+  </tr>
+  <tr bgcolor="#808080">
+    <td>&nbsp;</td>
+    <td colspan="2">
+      <%= submit_tag 'Close', :onclick => "$.nmTop().close(); return false;" %>
+    </td>
+  </tr>
+</table>

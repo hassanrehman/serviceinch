@@ -1,0 +1,52 @@
+<%= javascript_include_tag "jquery.nyroModal.custom" %>
+<%= stylesheet_link_tag "nyroModal"  %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.nyroModal').nyroModal();
+  });
+</script>
+
+
+<table width="710px" border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+  <tr bgcolor="#DDDDDD">
+  <div class="formHeading">
+    Customer List
+    <div style="float: right;"><%= link_to "Add New", ticket_category_path(:new), :class => "nyroModal" %></div>
+  </div>
+</tr>
+<tr bgcolor="#808080">
+  <td><%= page_entries_info @ticket_categories %></td>
+  <td style="text-align:right"><%= will_paginate @ticket_categories %></td>
+</tr>
+<tr bgcolor="#DDDDDD">
+  <td width="710px" colspan="2">
+    <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+      <tr class="table_head">
+        <td>Name</td>
+        <td>Comments</td>
+        <td>&nbsp;</td>
+      </tr>
+
+      <%- @ticket_categories.each do |t| -%>
+        <tr>
+          <td><%= t.name %></td>
+          <td><%= truncate(t.comments, :length => 30) %></td>
+          <td style="text-align: right;">
+            <%= link_to image_tag("/images/edit.png", :alt => "Edit", :width => 16, :height => 16), edit_ticket_category_path(t.id), :class => "nyroModal" %>&nbsp;
+            <%= link_to image_tag("/images/preview.png", :alt => "View", :width => 16, :height => 16), ticket_category_path(t.id), :class => "nyroModal" %>&nbsp;
+          </td>
+        </tr>
+      <%- end -%>
+
+    </table>
+  </td>
+
+
+</tr>
+<tr bgcolor="#808080">
+  <td><%= page_entries_info @ticket_categories %></td>
+  <td style="text-align:right"><%= will_paginate @ticket_categories %></td>
+</tr>
+</table>
+

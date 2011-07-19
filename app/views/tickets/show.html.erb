@@ -1,0 +1,129 @@
+<table border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+  <tr bgcolor="#DDDDDD">
+    <td>
+      <div class="formHeading">Ticket #<%=@ticket.id%></div>
+      <div class="formHeading formHeading2"><%= @ticket.subject %></div>
+      <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+        <tr>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td colspan="2" align="left">Added by <%= @ticket.added_by.name %> about <%= time_ago_in_words(@ticket.created_at) %> ago.</td>
+        </tr>
+
+        <tr>
+          <td class="ticket_left_col" align="left">Status</td>
+          <td><%= @ticket.ticket_status.name %></td>
+        </tr>
+
+        <tr>
+          <td align="left" class="ticket_left_col">Priority</td>
+          <td><%= @ticket.ticket_priority.name %></td>
+        </tr>
+
+        <tr>
+          <td align="left" class="ticket_left_col">Assigned To</td>
+          <td><%= (@ticket.assignee||User.new).name %></td>
+        </tr>
+
+        <tr>
+          <td align="left" class="ticket_left_col">Category</td>
+          <td><%= (@ticket.ticket_category||TicketCategory.new).name %></td>
+        </tr>
+
+        <tr>
+          <td align="left" class="ticket_left_col">Description</td>
+          <td><%= @ticket.description %></td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+
+  <% if @ticket.ticket_notes.size > 0 %>
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <div class="formHeading">History</div>
+
+        <% @ticket.ticket_notes.each do |note| %>
+          <div class="formHeading formHeading2">Updated by <%= note.updated_by.name %> <%= time_ago_in_words(note.created_at) %> ago.</div>
+          <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+            <tr>
+              <td colspan="2">&nbsp;</td>
+            </tr>
+
+            <% if note.ticket_changes.size > 0 %>
+              <tr>
+              <ul>
+                <% note.ticket_changes.each do |change| %>
+                  <li><%= "<b>#{change.changed_field}</b> changed from <i>#{change.old_value}</i> to <i>#{change.new_value}</i>" %></li>
+                <% end %>
+              </ul>
+        </tr>
+      <% end %>
+
+      <% unless note.comments.blank? %>
+        <tr>
+          <td colspan="2"><%= note.comments %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+  </td>
+  </tr>
+<% end %>
+
+<tr class="panel_options" bgcolor="#808080">
+  <td colspan="2">
+    <%= link_to "Update", "javascript:;", :onclick => "$('.ticket_update_form').slideToggle('fast')" %>
+    <%= link_to "Edit", edit_ticket_path(@ticket.id) if current_user.user_access.can_create_ticket %>
+    <%= link_to "Cancel", tickets_path %>
+  </td>
+</tr>
+
+
+<tr class="ticket_update_form" style="display: none" bgcolor="#DDDDDD">
+  <%- form_for @ticket do |f| -%>
+    <%= hidden_field_tag "ticket_note[updated_by_id]", current_user.id %>
+    <td>
+      <div class="formHeading">Update Ticket</div>
+      <% if false %> <div class="formHeading formHeading2"><%= @ticket.subject %></div> <% end %>
+      <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+        <tr>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td align="left">Status</td>
+          <td><%= f.collection_select(:ticket_status_id, SFactory.all_ticket_statuses, :id, :name) %></td>
+        </tr>
+
+        <tr>
+          <td align="left">Priority</td>
+          <td><%= f.collection_select(:ticket_priority_id, SFactory.all_ticket_priorities, :id, :name) %></td>
+        </tr>
+
+        <% if current_user.user_access.can_create_ticket %>
+          <tr>
+            <td align="left">Assigned To</td>
+            <td><%= f.collection_select(:assignee_id, SFactory.all_users, :id, :name, :include_blank => true) %></td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td align="left">Comments</td>
+          <td><%= text_area :ticket_note, :comments %></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr class="ticket_update_form"  style="display: none" bgcolor="#808080">
+    <td colspan="2">
+      <%= submit_tag "Update" %>
+      <%= link_to "Cancel", "javascript:;", :onclick => "$('.ticket_update_form').slideToggle('fast')" %>
+    </td>
+  </tr>
+<%- end -%>
+
+</table>

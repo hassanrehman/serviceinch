@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Serviceinch Help Desk</title>
+    <meta http-equiv="content-type" content="text/html;charset=iso-8859-2" />
+    <%= javascript_include_tag %w(application jquery) %>
+    <%= stylesheet_link_tag "style"  %>
+
+  </head>
+  <body>
+    <div class="content">
+      <div class="preheader">
+        <div class="padding">
+          <% if logged_in? %>
+          Welcome <%= current_user.name %>, 
+          <%= link_to "Log out", logout_path, { :title => "Log out" } %>
+          <% end %>
+        </div>
+      </div>
+      <div class="header">
+        <div class="title">Serviceinch Help Desk</div>
+        <div class="slogan">Serviceinch Help Desk</div>
+      </div>
+      <% if logged_in? %>
+      <div id="nav">
+        <%- ua = current_user.user_access -%>
+        <ul>
+          <% if false %><li><%= link_to "Home", root_path %></li> <% end %>
+          <li><%= link_to "Tickets", tickets_path %></li>
+          <li><%= link_to "Customers", customers_path %></li>
+          <% if ua.is_admin %><li><%= link_to "Agents", users_path %></li><%end%>
+          <% if ua.is_admin %><li><%= link_to "Ticket Categories", ticket_categories_path %></li><%end%>
+        </ul>
+      </div>
+      <% end %>
+      <div class="main_content">
+        <div class="sd_left">
+          <div class="text_padding">
+          <% if flash[:error] or
+                (@user and !@user.errors.blank?) or
+                (@ticket and !@ticket.errors.blank?) %>
+          <div class="top_message top_error"> 
+            <%= flash[:error] %>
+            <%= error_messages_for :user %>
+            <%= error_messages_for :ticket %>
+          </div>
+          <% end %>
+          
+          <%= yield %>
+            </div>
+        </div>
+        <div class="footer">
+          <div class="padding"> Powered by ServiceInch Technologies </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<% form_for @ticket_category do |f| -%>
+
+  <table border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+    <tr bgcolor="#DDDDDD">
+      <td width="2px" bgcolor="#808080">
+        <%#= error_messages_for :ticket_category %>
+      </td>
+      <td>
+        <div class="formHeading formHeadingModal">Add Ticket Category</div>
+        <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+          <tr>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td align="left">Name <%=image_tag "required_field.png"%></td>
+            <td><%= f.text_field :name %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Comments</td>
+            <td><%= f.text_area :comments %></td>
+          </tr>
+        </table>
+      </td>
+
+      <td valign="top">
+        <ul class="points">
+          <li>Category Name is mandatory.</li>
+          <li>Category Comments are optional.</li>
+          <li>Category comments are only for admin's memory and do not appear anywhere on the ticket.</li>
+          <li>Category Names will appear every time a ticket is added.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr bgcolor="#808080">
+      <td>&nbsp;</td>
+      <td colspan="2">
+        <%= submit_tag 'Submit', :onclick => "return validateTicketCategoryForm();" %>
+        <%= submit_tag 'Cancel', :onclick => "$.nmTop().close(); return false;" %>
+      </td>
+    </tr>
+  </table>
+
+<%- end -%>

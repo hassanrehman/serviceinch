@@ -1,0 +1,17 @@
+<br />
+
+<%- if @customers.blank? -%>
+  No Results found.
+<%- else -%>
+  <%= page_entries_info @customers %>
+  <br />
+  <br />
+  
+  <% @customers.each do |c| %>
+    <%= "#{c.company_name} -- #{link_to("Show", customer_path(c.id))} - #{link_to("Edit", edit_customer_path(c.id))}" %> <br />
+  <% end %>
+
+  <br />
+  <br />
+  <%= will_paginate @customers %>
+<%- end -%>

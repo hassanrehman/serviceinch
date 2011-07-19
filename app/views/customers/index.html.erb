@@ -1,0 +1,58 @@
+<%= javascript_include_tag "jquery.nyroModal.custom" %>
+<%= stylesheet_link_tag "nyroModal"  %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.nyroModal').nyroModal();
+  });
+</script>
+
+<table width="710px" border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+  <tr bgcolor="#DDDDDD">
+  <div class="formHeading">
+    Customer List
+    <% if current_user.user_access.can_edit_customer %>
+    <div style="float: right;"><%= link_to "Add New", customer_path(:new), :class => "nyroModal" %></div>
+    <% end %>
+  </div>
+</tr>
+<tr bgcolor="#808080">
+  <td><%= page_entries_info @customers %></td>
+  <td style="text-align:right"><%= will_paginate @customers %></td>
+</tr>
+<tr bgcolor="#DDDDDD">
+  <td width="710px" colspan="2">
+    <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+      <tr class="table_head">
+        <td>Company Name</td>
+        <td>Customer Name</td>
+        <td>Address</td>
+        <td>E-mail</td>
+        <td>&nbsp;</td>
+      </tr>
+
+      <%- @customers.each do |c| -%>
+        <tr>
+          <td><%= c.company_name %></td>
+          <td><%= "#{c.last_name}, #{c.first_name}" %></td>
+          <td><%= c.address %></td>
+          <td><%= c.email %></td>
+          <td style="text-align: right;">
+            <% if current_user.user_access.can_edit_customer %>
+              <%= link_to image_tag("/images/edit.png", :alt => "Edit", :width => 16, :height => 16), edit_customer_path(c.id), :class => "nyroModal" %>&nbsp;
+            <% end %>
+            <%= link_to image_tag("/images/preview.png", :alt => "View", :width => 16, :height => 16), customer_path(c.id), :class => "nyroModal" %>&nbsp;
+          </td>
+        </tr>
+      <%- end -%>
+
+    </table>
+  </td>
+
+
+</tr>
+<tr bgcolor="#808080">
+  <td><%= page_entries_info @customers %></td>
+  <td style="text-align:right"><%= will_paginate @customers %></td>
+</tr>
+</table>

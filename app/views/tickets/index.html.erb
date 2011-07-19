@@ -1,0 +1,43 @@
+<table width="710px" border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+  <tr bgcolor="#DDDDDD">
+  <div class="formHeading">
+    Ticket List
+    <% if current_user.user_access.can_create_ticket %>
+    <div style="float: right;"><%= link_to "Add New", ticket_path(:new) %></div>
+    <% end %>
+  </div>
+</tr>
+<tr bgcolor="#808080">
+  <td><%= page_entries_info @tickets %></td>
+  <td style="text-align:right"><%= will_paginate @tickets %></td>
+</tr>
+<tr bgcolor="#DDDDDD">
+  <td width="710px" colspan="2">
+    <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+      <tr class="table_head">
+        <td>ID</td>
+        <td>Status</td>
+        <td>Priority</td>
+        <td>Subject</td>
+        <td>Assigned To</td>
+      </tr>
+
+      <%- @tickets.each do |t| -%>
+        <tr>
+          <td><%= link_to t.id, ticket_path(t.id) %></td>
+          <td><%= t.ticket_status.name %></td>
+          <td><%= t.ticket_priority.name %></td>
+          <td><%= link_to t.subject, ticket_path(t.id) %></td>
+          <td><%= (t.assignee||User.new).name %></td>
+        </tr>
+      <%- end -%>
+
+    </table>
+  </td>
+
+</tr>
+<tr bgcolor="#808080">
+  <td><%= page_entries_info @tickets %></td>
+  <td style="text-align:right"><%= will_paginate @tickets %></td>
+</tr>
+</table>

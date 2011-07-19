@@ -1,0 +1,70 @@
+<% form_for @user do |f| -%>
+
+  <table border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+    <tr bgcolor="#DDDDDD">
+      <td width="2px" bgcolor="#808080">
+        <%#= error_messages_for :user %>
+      </td>
+      <td>
+        <div class="formHeading formHeadingModal">Agent Info Edit</div>
+        <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+          <tr>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td align="left">Username <%=image_tag "required_field.png"%></td>
+            <td><%= f.text_field :login %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Full Name</td>
+            <td><%= f.text_field :name %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Email <%=image_tag "required_field.png"%></td>
+            <td><%= f.text_field :email %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Password <%=image_tag "required_field.png"%></td>
+            <td><%= f.password_field :password %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Confirm Password</td>
+            <td><%= f.password_field :password_confirmation %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Can Create/Edit Tickets</td>
+            <td><%= check_box :user_access, :can_create_ticket %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Can Create/Edit Customers</td>
+            <td><%= check_box :user_access, :can_edit_customer %></td>
+          </tr>
+        </table>
+      </td>
+
+      <td valign="top">
+        <ul class="points">
+          <li>Username, Password and Email are mandatory.</li>
+          <li>Full Name is optional but recommended.</li>
+          <li>Can Create/Edit Tickets are access rights for users.</li>
+          <li>Can View/Create/Edit Customers are access rights for users.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr bgcolor="#808080">
+      <td>&nbsp;</td>
+      <td colspan="2">
+        <%= submit_tag 'Submit' %>
+        <%= submit_tag 'Cancel', :onclick => "$.nmTop().close(); return false;" %>
+      </td>
+    </tr>
+  </table>
+
+<%- end -%>

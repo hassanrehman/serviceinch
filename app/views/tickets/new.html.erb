@@ -1,0 +1,69 @@
+<% form_for @ticket do |f| -%>
+
+  <%= f.hidden_field :added_by_id %>
+  <table border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <div class="formHeading formHeadingModal">New Ticket</div>
+        <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
+          <tr>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td align="left">Subject <%=image_tag "required_field.png"%></td>
+            <td><%= f.text_field :subject, :size => 50 %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Description</td>
+            <td><%= f.text_area :description %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Status <%=image_tag "required_field.png"%></td>
+            <td><%= f.collection_select(:ticket_status_id, SFactory.all_ticket_statuses, :id, :name) %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Customer</td>
+            <td><%= f.collection_select(:customer_id, SFactory.all_customers, :id, :name, :include_blank => true) %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Priority <%=image_tag "required_field.png"%></td>
+            <td><%= f.collection_select(:ticket_priority_id, SFactory.all_ticket_priorities, :id, :name) %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Assigned To</td>
+            <td><%= f.collection_select(:assignee_id, SFactory.all_users, :id, :name, :include_blank => true) %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Category</td>
+            <td><%= f.collection_select(:ticket_category_id, SFactory.all_ticket_categories, :id, :name, :include_blank => true) %></td>
+          </tr>
+        </table>
+      </td>
+      <td valign="top">
+        <ul class="points">
+          <li>Subject is mandatory.</li>
+          <li>Subject will appear on the main grid.</li>
+          <li>Description is the detailed description of the ticket.</li>
+          <li>Status of the ticket depicts work to be done.</li>
+          <li>You may or may not assign a ticket to a customer.</li>
+          <li>Assign priority with respect to the nature of the ticket.</li>
+          <li>Select the category the ticket lies in.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr bgcolor="#808080">
+      <td colspan="2">
+        <%= submit_tag "Create", :onclick => "return validateTicketForm();" %>
+        <%= link_to "Cancel", tickets_path %>
+      </td>
+    </tr>
+  </table>
+
+<%- end -%>
