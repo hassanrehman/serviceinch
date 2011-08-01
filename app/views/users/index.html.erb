@@ -7,12 +7,14 @@
   });
 </script>
 
-
+<%- can_manage = current_user.user_access.manage_agents -%>
 <table width="710px" border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
   <tr bgcolor="#DDDDDD">
   <div class="formHeading">
     Agent List
-    <div style="float: right;"><%= link_to "Add New", user_path(:new), :class => "nyroModal" %></div>
+    <div style="float: right;">
+      <%= link_to "Add New", user_path(:new), :class => "nyroModal" if can_manage %>
+    </div>
   </div>
 </tr>
 <tr bgcolor="#808080">
@@ -27,7 +29,9 @@
         <td>Name</td>
         <td>Email</td>
         <td>Tickets</td>
+        <td>Ticket Cats</td>
         <td>Customers</td>
+        <td>Agents</td>
         <td>&nbsp;</td>
       </tr>
 
@@ -36,10 +40,12 @@
           <td><%= u.login %></td>
           <td><%= u.name %></td>
           <td><%= u.email %></td>
-          <td><%= image_tag "access_#{u.user_access.can_create_ticket}.png" %><%#= u.user_access.can_create_ticket ? "YES" : "NO" %></td>
-          <td><%= image_tag "access_#{u.user_access.can_edit_customer}.png" %><%#= u.user_access.can_edit_customer ? "YES" : "NO" %></td>
+          <td><%= image_tag "access_#{u.user_access.manage_tickets||false}.png" %></td>
+          <td><%= image_tag "access_#{u.user_access.manage_ticket_categories||false}.png" %></td>
+          <td><%= image_tag "access_#{u.user_access.manage_customers||false}.png" %></td>
+          <td><%= image_tag "access_#{u.user_access.manage_agents||false}.png" %></td>
           <td style="text-align: right;">
-            <%= link_to image_tag("/images/edit.png", :alt => "Edit", :width => 16, :height => 16), edit_user_path(u.id), :class => "nyroModal" %>&nbsp;
+            <%= link_to image_tag("/images/edit.png", :alt => "Edit", :width => 16, :height => 16), edit_user_path(u.id), :class => "nyroModal" if can_manage %>&nbsp;
             <%= link_to image_tag("/images/preview.png", :alt => "View", :width => 16, :height => 16), user_path(u.id), :class => "nyroModal" %>&nbsp;
           </td>
         </tr>

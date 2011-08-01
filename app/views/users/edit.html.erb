@@ -38,13 +38,23 @@
           </tr>
 
           <tr>
-            <td align="left">Can Create/Edit Tickets</td>
-            <td><%= check_box :user_access, :can_create_ticket %></td>
+            <td align="left">Manage Tickets</td>
+            <td><%= check_box :user_access, :manage_tickets %></td>
           </tr>
 
           <tr>
-            <td align="left">Can Create/Edit Customers</td>
-            <td><%= check_box :user_access, :can_edit_customer %></td>
+            <td align="left">Manage Ticket Categories</td>
+            <td><%= check_box :user_access, :manage_ticket_categories %></td>
+          </tr>
+
+          <tr>
+            <td align="left">Manage Customers</td>
+            <td><%= check_box :user_access, :manage_customers %></td>
+          </tr>
+          
+          <tr>
+            <td align="left">Manage Agents</td>
+            <td><%= check_box :user_access, :manage_agents %></td>
           </tr>
         </table>
       </td>
@@ -53,8 +63,9 @@
         <ul class="points">
           <li>Username, Password and Email are mandatory.</li>
           <li>Full Name is optional but recommended.</li>
-          <li>Can Create/Edit Tickets are access rights for users.</li>
-          <li>Can View/Create/Edit Customers are access rights for users.</li>
+          <li>Manage Tickets are access rights for Agents to be able to create and edit tickets.</li>
+          <li>Agents who can create/edit tickets can also reassign tickets to other Agents.</li>
+          <li>Manage Agents, Ticket Categories and Customers is similar to Managing Tickets.</li>
         </ul>
       </td>
     </tr>

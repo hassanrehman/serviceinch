@@ -25,14 +25,26 @@
         </tr>
         <%- @user_access = @user.user_access -%>
         <tr>
-          <td align="left">Can Create/Edit Tickets</td>
-          <td><%= image_tag "access_#{@user_access.can_create_ticket}.png" %></td>
+          <td align="left">Can Manage Tickets</td>
+          <td><%= image_tag "access_#{@user_access.manage_tickets||false}.png" %></td>
         </tr>
 
         <tr>
-          <td align="left">Can Create/Edit Customers</td>
-          <td><%= image_tag "access_#{@user_access.can_edit_customer}.png" %></td>
+          <td align="left">Can Manage Ticket Categories</td>
+          <td><%= image_tag "access_#{@user_access.manage_ticket_categories||false}.png" %></td>
         </tr>
+
+        <tr>
+          <td align="left">Can Manage Customers</td>
+          <td><%= image_tag "access_#{@user_access.manage_customers||false}.png" %></td>
+        </tr>
+
+        <tr>
+          <td align="left">Can Manage Agents</td>
+          <td><%= image_tag "access_#{@user_access.manage_agents||false}.png" %></td>
+        </tr>
+
+
       </table>
     </td>
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110710213759) do
+ActiveRecord::Schema.define(:version => 20110719202915) do
 
   create_table "customers", :force => true do |t|
     t.string   "company_name"
@@ -92,11 +92,13 @@ ActiveRecord::Schema.define(:version => 20110710213759) do
 
   create_table "user_accesses", :force => true do |t|
     t.string   "comments"
-    t.boolean  "can_create_ticket"
-    t.boolean  "can_edit_customer"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "manage_customers"
+    t.boolean  "manage_tickets"
+    t.boolean  "manage_ticket_categories"
+    t.boolean  "manage_agents"
   end
 
   create_table "users", :force => true do |t|

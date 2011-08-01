@@ -36,8 +36,8 @@
               <td><%= u.login %></td>
               <td><%= u.name %></td>
               <td><%= u.email %></td>
-              <td><%= image_tag "access_#{u.user_access.can_create_ticket}.jpg" %><%#= u.user_access.can_create_ticket ? "YES" : "NO" %></td>
-              <td><%= image_tag "access_#{u.user_access.can_edit_customer}.jpg" %><%#= u.user_access.can_edit_customer ? "YES" : "NO" %></td>
+              <td><%= image_tag "access_#{u.user_access.manage_tickets}.jpg" %></td>
+              <td><%= image_tag "access_#{u.user_access.manage_customers}.jpg" %></td>
               <td style="text-align: right;">
                 <%= link_to image_tag("/images/edit.png", :alt => "Edit", :width => 16, :height => 16), edit_user_path(u.id), :class => "nyroModal" %>&nbsp;
                 <%= link_to image_tag("/images/preview.png", :alt => "View", :width => 16, :height => 16), user_path(u.id), :class => "nyroModal" %>&nbsp;

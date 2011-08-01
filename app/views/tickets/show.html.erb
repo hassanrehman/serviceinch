@@ -33,6 +33,11 @@
         </tr>
 
         <tr>
+          <td align="left" class="ticket_left_col">Category Details</td>
+          <td><%= (@ticket.ticket_category||TicketCategory.new).comments %></td>
+        </tr>
+
+        <tr>
           <td align="left" class="ticket_left_col">Description</td>
           <td><%= @ticket.description %></td>
         </tr>
@@ -77,7 +82,7 @@
 <tr class="panel_options" bgcolor="#808080">
   <td colspan="2">
     <%= link_to "Update", "javascript:;", :onclick => "$('.ticket_update_form').slideToggle('fast')" %>
-    <%= link_to "Edit", edit_ticket_path(@ticket.id) if current_user.user_access.can_create_ticket %>
+    <%= link_to "Edit", edit_ticket_path(@ticket.id) if current_user.user_access.manage_tickets %>
     <%= link_to "Cancel", tickets_path %>
   </td>
 </tr>
@@ -88,7 +93,6 @@
     <%= hidden_field_tag "ticket_note[updated_by_id]", current_user.id %>
     <td>
       <div class="formHeading">Update Ticket</div>
-      <% if false %> <div class="formHeading formHeading2"><%= @ticket.subject %></div> <% end %>
       <table width="100%" border="0" cellpadding="3px" class="htmlForm" cellspacing="0">
         <tr>
           <td colspan="2">&nbsp;</td>
@@ -104,7 +108,7 @@
           <td><%= f.collection_select(:ticket_priority_id, SFactory.all_ticket_priorities, :id, :name) %></td>
         </tr>
 
-        <% if current_user.user_access.can_create_ticket %>
+        <% if current_user.user_access.manage_tickets %>
           <tr>
             <td align="left">Assigned To</td>
             <td><%= f.collection_select(:assignee_id, SFactory.all_users, :id, :name, :include_blank => true) %></td>

@@ -7,12 +7,14 @@
   });
 </script>
 
-
+<%- can_manage = current_user.user_access.manage_ticket_categories -%>
 <table width="710px" border="0" cellpadding="2px" cellspacing="1px" bgcolor="#808080">
   <tr bgcolor="#DDDDDD">
   <div class="formHeading">
     Customer List
-    <div style="float: right;"><%= link_to "Add New", ticket_category_path(:new), :class => "nyroModal" %></div>
+    <div style="float: right;">
+      <%= link_to "Add New", ticket_category_path(:new), :class => "nyroModal" if can_manage %>
+    </div>
   </div>
 </tr>
 <tr bgcolor="#808080">
@@ -33,7 +35,7 @@
           <td><%= t.name %></td>
           <td><%= truncate(t.comments, :length => 30) %></td>
           <td style="text-align: right;">
-            <%= link_to image_tag("/images/edit.png", :alt => "Edit", :width => 16, :height => 16), edit_ticket_category_path(t.id), :class => "nyroModal" %>&nbsp;
+            <%= link_to image_tag("/images/edit.png", :alt => "Edit", :width => 16, :height => 16), edit_ticket_category_path(t.id), :class => "nyroModal" if can_manage %>&nbsp;
             <%= link_to image_tag("/images/preview.png", :alt => "View", :width => 16, :height => 16), ticket_category_path(t.id), :class => "nyroModal" %>&nbsp;
           </td>
         </tr>

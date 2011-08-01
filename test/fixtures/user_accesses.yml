@@ -2,10 +2,10 @@
 
 one:
   comments: MyString
-  can_create_ticket: false
-  can_edit_customer: false
+  manage_tickets: false
+  manage_customers: false
 
 two:
   comments: MyString
-  can_create_ticket: false
-  can_edit_customer: false
+  manage_tickets: false
+  manage_customers: false

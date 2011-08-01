@@ -2,7 +2,7 @@
   <tr bgcolor="#DDDDDD">
   <div class="formHeading">
     Ticket List
-    <% if current_user.user_access.can_create_ticket %>
+    <% if current_user.user_access.manage_tickets %>
     <div style="float: right;"><%= link_to "Add New", ticket_path(:new) %></div>
     <% end %>
   </div>
